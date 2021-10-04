@@ -13,13 +13,13 @@ export class StudentResolver {
     return this.studentService.create(createStudentInput);
   }
 
-  @Query(() => [Student], { name: 'student' })
+  @Query(() => [Student])
   findAll() {
     return this.studentService.findAll();
   }
 
-  @Query(() => Student, { name: 'student' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Student)
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.studentService.findOne(id);
   }
 
