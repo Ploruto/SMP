@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Class } from '../../class/entities/class.entity';
 
 @Entity()
 @ObjectType()
@@ -8,7 +9,7 @@ export class Student {
   @PrimaryGeneratedColumn("uuid")
   @Field()
   id: string;
-
+  
   @Column()
   @Field()
   first_name: string;
@@ -28,5 +29,7 @@ export class Student {
   @Field({nullable: true})
   phone_number: string;
 
-
+  @ManyToOne(type => Class)
+  @Field()
+  class: Class;
 }

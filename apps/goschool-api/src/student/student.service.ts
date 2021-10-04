@@ -10,8 +10,6 @@ export class StudentService {
 
   constructor(@InjectRepository(Student) private studentRepository: Repository<Student>){}
 
-  internalDB: Array<Student> = [{email: "so", encrypted_password:"a", first_name: "adad", id:"123", last_name: "adla", phone_number:"102310"}];
-
   async create(createStudentInput: CreateStudentInput): Promise<Student> {
     const student = this.studentRepository.create(createStudentInput);
     return await this.studentRepository.save(student);
