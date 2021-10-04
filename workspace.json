@@ -1,7 +1,60 @@
 {
   "version": 2,
-  "projects": {},
+  "projects": {
+    "goschool-api": {
+      "root": "apps/goschool-api",
+      "sourceRoot": "apps/goschool-api/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/goschool-api",
+            "main": "apps/goschool-api/src/main.ts",
+            "tsConfig": "apps/goschool-api/tsconfig.app.json",
+            "assets": ["apps/goschool-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/goschool-api/src/environments/environment.ts",
+                  "with": "apps/goschool-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "goschool-api:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/goschool-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/goschool-api"],
+          "options": {
+            "jestConfig": "apps/goschool-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "goschool-api"
 }
