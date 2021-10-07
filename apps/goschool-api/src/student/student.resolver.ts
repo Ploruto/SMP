@@ -14,12 +14,14 @@ export class StudentResolver {
   }
 
   @Query(() => [Student])
-  findAll() {
+  findAllStudents() {
     return this.studentService.findAll();
   }
 
+  
+
   @Query(() => Student)
-  findOne(@Args('id', { type: () => String }) id: string) {
+  findOneStudent(@Args('id', { type: () => String }) id: string) {
     return this.studentService.findOne(id);
   }
 

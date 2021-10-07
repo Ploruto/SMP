@@ -1,8 +1,8 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
+import { ClassGroup } from '../../class-group/entities/class-group.entity';
 
 @InputType()
 export class CreateStudentInput {
-
 
   @Field()
   first_name: string;
@@ -14,6 +14,12 @@ export class CreateStudentInput {
   encrypted_password: string;
   @Field()
   email: string;
-  @Field()
+  @Field({nullable: true})
   phone_number:string;
+
+  @Field()
+  group_name: string
+
+
+
 }

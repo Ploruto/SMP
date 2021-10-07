@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
-import { ClassModule } from '../class/class.module';
-import { Class } from '../class/entities/class.entity';
+import { ClassGroupModule } from '../class-group/class-group.module';
+import { ClassGroup } from '../class-group/entities/class-group.entity';
 import { Student } from '../student/entities/student.entity';
 import { StudentModule } from '../student/student.module';
 
@@ -13,7 +13,7 @@ import { AppService } from './app.service';
 @Module({
   imports: [
     StudentModule,
-    ClassModule,
+    ClassGroupModule,
     GraphQLModule.forRoot({
       debug: true,
       playground: true,
@@ -25,8 +25,9 @@ import { AppService } from './app.service';
       port: 5432,
       username:"postgres",
       password:"postgres",
-      entities: ["dist/**/*.entity{.ts,.js}", Student, Class],
+      entities: ["dist/**/*.entity{.ts,.js}", Student, ClassGroup],
       synchronize: true,
+      database: "graphql"
     })
   ],
   controllers: [AppController],
