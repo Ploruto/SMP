@@ -16,7 +16,7 @@ export class Grade {
 
   @Column((type) => Number)
   @Field((type) => Int)
-  mark: 1 | 2 | 3 | 4 | 5 | 6;
+  mark: number;
 
   @Column((type) => Subject)
   @Field((type) => Subject)

@@ -5,4 +5,13 @@ import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 export class UpdateSubjectInput extends PartialType(CreateSubjectInput) {
   @Field(() => Int)
   id: number;
+
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field((type) => [Number], { nullable: true })
+  teacher_ids?: number[];
+
+  @Field({ nullable: true })
+  color_hex?: string;
 }

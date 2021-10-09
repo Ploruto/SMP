@@ -2,6 +2,12 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateSubjectInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field()
+  name: string;
+
+  @Field((type) => [Number])
+  teacher_ids: number[];
+
+  @Field()
+  color_hex: string;
 }

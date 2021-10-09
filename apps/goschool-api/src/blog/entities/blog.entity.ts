@@ -23,6 +23,6 @@ export class Blog {
   content: string;
 
   @CreateDateColumn({ name: 'created_at' })
-  @Field()
+  @Field((type) => Date)
   created_at: Date;
 }

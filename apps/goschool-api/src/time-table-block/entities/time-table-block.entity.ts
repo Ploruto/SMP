@@ -28,11 +28,11 @@ export class TimeTableBlock {
   to_date: Date;
 
   @Column((type) => Teacher)
-  @Field((type) => Teacher)
+  @Field((type) => Teacher, { nullable: true })
   take_over_teacher: Teacher;
 
   @Column((type) => Boolean)
-  @Field((type) => Boolean)
+  @Field((type) => Boolean, { defaultValue: false })
   is_cancelled: boolean;
 
   @Column((type) => ClassGroup)
