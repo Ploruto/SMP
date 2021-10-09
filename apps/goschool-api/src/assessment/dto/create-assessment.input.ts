@@ -2,6 +2,15 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateAssessmentInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field((type) => Int)
+  subject_id: number;
+
+  @Field()
+  topic: string;
+
+  @Field((type) => Date)
+  date: Date;
+
+  @Field((type) => Int)
+  class_group_id: number;
 }

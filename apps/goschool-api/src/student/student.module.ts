@@ -7,6 +7,6 @@ import { ClassGroup } from '../class-group/entities/class-group.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Student, ClassGroup])],
-  providers: [StudentResolver, StudentService]
+  providers: [StudentResolver, StudentService],
 })
 export class StudentModule {}

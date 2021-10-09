@@ -1,9 +1,18 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Entity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 @ObjectType()
 export class School {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @PrimaryGeneratedColumn('increment')
+  @Field((type) => Int)
+  id: number;
+
+  @Column()
+  @Field()
+  homepage_url: string;
+
+  @Column()
+  @Field()
+  name: string;
 }
