@@ -10,15 +10,15 @@ export class Grade {
   @Field((type) => Int)
   id: number;
 
-  @Column((type) => GradeType)
+  @Column((type) => Number)
   @Field((type) => GradeType)
-  type: GradeType;
+  type: number;
 
   @Column((type) => Number)
   @Field((type) => Int)
   mark: number;
 
-  @Column((type) => Subject)
+  @Column((type) => Number)
   @Field((type) => Subject)
-  subject: Subject;
+  subject: number;
 }

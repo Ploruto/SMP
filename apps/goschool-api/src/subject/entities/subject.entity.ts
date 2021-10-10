@@ -3,6 +3,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -19,10 +20,9 @@ export class Subject {
   @Field()
   name: string;
 
-  @ManyToMany(() => Teacher, { cascade: true })
-  @JoinColumn()
+  @Column((type) => Number, { array: true })
   @Field((type) => [Teacher])
-  teachers: Teacher[];
+  teachers: number[];
 
   @Column()
   @Field()

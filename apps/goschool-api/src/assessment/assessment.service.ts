@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateAssessmentInput } from './dto/create-assessment.input';
 import { UpdateAssessmentInput } from './dto/update-assessment.input';
+import { Assessment } from './entities/assessment.entity';
 
 @Injectable()
 export class AssessmentService {
-  create(createAssessmentInput: CreateAssessmentInput) {
-    return 'This action adds a new assessment';
+  constructor(
+    @InjectRepository(Assessment) private assessmentRepo: Repository<Assessment>
+  ) {}
+
+  async create(createAssessmentInput: CreateAssessmentInput) {
+    const assessment = this.assessmentRepo.create(createAssessmentInput);
+    return await this.assessmentRepo.save(assessment);
   }
 
-  findAll() {
-    return `This action returns all assessment`;
+  async findAll() {
+    return await this.assessmentRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} assessment`;
+  async findOne(id: number) {
+    return await this.assessmentRepo.findOneOrFail({ id });
   }
 
-  update(id: number, updateAssessmentInput: UpdateAssessmentInput) {
-    return `This action updates a #${id} assessment`;
+  async update(id: number, updateAssessmentInput: UpdateAssessmentInput) {
+    this.assessmentRepo.update({ id }, updateAssessmentInput);
+    return await this.assessmentRepo.findOneOrFail({ id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} assessment`;
+  async remove(id: number) {
+    const assessment = await this.assessmentRepo.findOneOrFail({ id });
+    return await this.assessmentRepo.remove(assessment);
   }
 }

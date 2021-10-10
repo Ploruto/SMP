@@ -1,26 +1,45 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Subject } from 'typeorm/persistence/Subject';
 import { CreateTeacherInput } from './dto/create-teacher.input';
 import { UpdateTeacherInput } from './dto/update-teacher.input';
+import { Teacher } from './entities/teacher.entity';
 
 @Injectable()
 export class TeacherService {
-  create(createTeacherInput: CreateTeacherInput) {
-    return 'This action adds a new teacher';
+  constructor(
+    @InjectRepository(Teacher) private teacherRepo: Repository<Teacher>,
+    @InjectRepository(Subject) private subjectRepo: Repository<Subject>
+  ) {}
+
+  async create(createTeacherInput: CreateTeacherInput): Promise<Teacher> {
+    const teacher = await this.teacherRepo.create(createTeacherInput);
+    const subjects = createTeacherInput.subject_ids.map(
+      async (val) => await this.subjectRepo.findOneOrFail(val)
+    );
+    const awaitedSubjects = await Promise.all(subjects);
+    console.log(awaitedSubjects);
+
+    //teacher.subjects = awaitedSubjects;
+    return await this.teacherRepo.save(teacher);
   }
 
-  findAll() {
-    return `This action returns all teacher`;
+  async findAll() {
+    return await this.teacherRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} teacher`;
+  async findOne(id: number) {
+    return await this.teacherRepo.findOneOrFail({ id });
   }
 
-  update(id: number, updateTeacherInput: UpdateTeacherInput) {
-    return `This action updates a #${id} teacher`;
+  async update(id: number, updateTeacherInput: UpdateTeacherInput) {
+    await this.teacherRepo.update({ id }, updateTeacherInput);
+    return await this.teacherRepo.findOneOrFail({ id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} teacher`;
+  async remove(id: number) {
+    const teacher = await this.teacherRepo.findOneOrFail({ id });
+    return await this.teacherRepo.remove(teacher);
   }
 }

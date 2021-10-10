@@ -24,7 +24,7 @@ export class Student {
   @Field({ nullable: true })
   email: string;
 
-  @Column((type) => ClassGroup)
-  @Field()
-  class_group: ClassGroup;
+  @Column((type) => Number)
+  @Field((type) => ClassGroup)
+  class_group: number;
 }

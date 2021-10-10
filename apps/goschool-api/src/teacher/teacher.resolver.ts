@@ -9,23 +9,30 @@ export class TeacherResolver {
   constructor(private readonly teacherService: TeacherService) {}
 
   @Mutation(() => Teacher)
-  createTeacher(@Args('createTeacherInput') createTeacherInput: CreateTeacherInput) {
+  createTeacher(
+    @Args('createTeacherInput') createTeacherInput: CreateTeacherInput
+  ) {
     return this.teacherService.create(createTeacherInput);
   }
 
-  @Query(() => [Teacher], { name: 'teacher' })
+  @Query(() => [Teacher], { name: 'findAllTeachers' })
   findAll() {
     return this.teacherService.findAll();
   }
 
-  @Query(() => Teacher, { name: 'teacher' })
+  @Query(() => Teacher, { name: 'findOneTeacher' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.teacherService.findOne(id);
   }
 
   @Mutation(() => Teacher)
-  updateTeacher(@Args('updateTeacherInput') updateTeacherInput: UpdateTeacherInput) {
-    return this.teacherService.update(updateTeacherInput.id, updateTeacherInput);
+  updateTeacher(
+    @Args('updateTeacherInput') updateTeacherInput: UpdateTeacherInput
+  ) {
+    return this.teacherService.update(
+      updateTeacherInput.id,
+      updateTeacherInput
+    );
   }
 
   @Mutation(() => Teacher)

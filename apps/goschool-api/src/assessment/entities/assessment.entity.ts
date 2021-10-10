@@ -10,9 +10,9 @@ export class Assessment {
   @Field((type) => Int)
   id: number;
 
-  @Column((type) => Subject)
+  @Column((type) => Number)
   @Field((type) => Subject)
-  subject: Subject;
+  subject: number;
 
   @Column()
   @Field()
@@ -22,7 +22,7 @@ export class Assessment {
   @Field((type) => Date)
   date: Date;
 
-  @Column((type) => ClassGroup)
+  @Column((type) => Number)
   @Field((type) => ClassGroup)
-  class_group: ClassGroup;
+  class_group: number;
 }

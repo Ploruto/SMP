@@ -11,13 +11,13 @@ export class TimeTableBlock {
   @Field((type) => Int)
   id: number;
 
-  @Column((type) => Subject)
+  @Column((type) => Number)
   @Field((type) => Subject)
-  subject: Subject;
+  subject: number;
 
-  @Column((type) => Teacher)
+  @Column((type) => Number)
   @Field((type) => Teacher)
-  teacher: Teacher;
+  teacher: number;
 
   @Column((type) => Date)
   @Field((type) => Date)
@@ -27,15 +27,15 @@ export class TimeTableBlock {
   @Field((type) => Date)
   to_date: Date;
 
-  @Column((type) => Teacher)
+  @Column((type) => Number)
   @Field((type) => Teacher, { nullable: true })
-  take_over_teacher: Teacher;
+  take_over_teacher: number;
 
   @Column((type) => Boolean)
   @Field((type) => Boolean, { defaultValue: false })
   is_cancelled: boolean;
 
-  @Column((type) => ClassGroup)
+  @Column((type) => Number)
   @Field((type) => ClassGroup)
-  class_group: ClassGroup;
+  class_group: number;
 }

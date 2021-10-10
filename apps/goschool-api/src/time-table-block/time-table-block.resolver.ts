@@ -9,23 +9,34 @@ export class TimeTableBlockResolver {
   constructor(private readonly timeTableBlockService: TimeTableBlockService) {}
 
   @Mutation(() => TimeTableBlock)
-  createTimeTableBlock(@Args('createTimeTableBlockInput') createTimeTableBlockInput: CreateTimeTableBlockInput) {
+  createTimeTableBlock(
+    @Args('createTimeTableBlockInput')
+    createTimeTableBlockInput: CreateTimeTableBlockInput
+  ) {
     return this.timeTableBlockService.create(createTimeTableBlockInput);
   }
 
-  @Query(() => [TimeTableBlock], { name: 'timeTableBlock' })
+  @Query(() => [TimeTableBlock], {
+    name: 'findAllTimeTableBlock',
+  })
   findAll() {
     return this.timeTableBlockService.findAll();
   }
 
-  @Query(() => TimeTableBlock, { name: 'timeTableBlock' })
+  @Query(() => TimeTableBlock, { name: 'findTimeTableBlock' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.timeTableBlockService.findOne(id);
   }
 
   @Mutation(() => TimeTableBlock)
-  updateTimeTableBlock(@Args('updateTimeTableBlockInput') updateTimeTableBlockInput: UpdateTimeTableBlockInput) {
-    return this.timeTableBlockService.update(updateTimeTableBlockInput.id, updateTimeTableBlockInput);
+  updateTimeTableBlock(
+    @Args('updateTimeTableBlockInput')
+    updateTimeTableBlockInput: UpdateTimeTableBlockInput
+  ) {
+    return this.timeTableBlockService.update(
+      updateTimeTableBlockInput.id,
+      updateTimeTableBlockInput
+    );
   }
 
   @Mutation(() => TimeTableBlock)

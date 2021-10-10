@@ -11,6 +11,9 @@ export class CreateTeacherInput {
   @Field({ nullable: true })
   email: string;
 
+  @Field()
+  password: string;
+
   @Field({ nullable: true })
   phone_number: string;
 

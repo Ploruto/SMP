@@ -26,7 +26,7 @@ export class Homework {
   @Field((type) => Date)
   due_to: Date;
 
-  @Column((type) => ClassGroup)
+  @Column((type) => Number)
   @Field((type) => ClassGroup)
-  class_group: ClassGroup;
+  class_group: number;
 }

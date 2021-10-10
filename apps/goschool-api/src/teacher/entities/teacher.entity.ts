@@ -28,7 +28,7 @@ export class Teacher {
   @Field({ nullable: true })
   phone_number: string;
 
-  @ManyToMany((type) => Subject, { cascade: true })
+  @ManyToMany((type) => Subject, (subject) => subject.teachers)
   @Field((type) => [Subject])
   subjects: Subject[];
 

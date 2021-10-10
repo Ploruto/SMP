@@ -9,23 +9,30 @@ export class AssessmentResolver {
   constructor(private readonly assessmentService: AssessmentService) {}
 
   @Mutation(() => Assessment)
-  createAssessment(@Args('createAssessmentInput') createAssessmentInput: CreateAssessmentInput) {
+  createAssessment(
+    @Args('createAssessmentInput') createAssessmentInput: CreateAssessmentInput
+  ) {
     return this.assessmentService.create(createAssessmentInput);
   }
 
-  @Query(() => [Assessment], { name: 'assessment' })
+  @Query(() => [Assessment], { name: 'findAllAssessments' })
   findAll() {
     return this.assessmentService.findAll();
   }
 
-  @Query(() => Assessment, { name: 'assessment' })
+  @Query(() => Assessment, { name: 'findOneAssessment' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.assessmentService.findOne(id);
   }
 
   @Mutation(() => Assessment)
-  updateAssessment(@Args('updateAssessmentInput') updateAssessmentInput: UpdateAssessmentInput) {
-    return this.assessmentService.update(updateAssessmentInput.id, updateAssessmentInput);
+  updateAssessment(
+    @Args('updateAssessmentInput') updateAssessmentInput: UpdateAssessmentInput
+  ) {
+    return this.assessmentService.update(
+      updateAssessmentInput.id,
+      updateAssessmentInput
+    );
   }
 
   @Mutation(() => Assessment)
